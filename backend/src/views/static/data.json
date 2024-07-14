@@ -1,0 +1,55 @@
+{
+    "websiteUrl": "http://wiki.alcidesfonseca.com/",
+    "reportDate": "4/1/2024",
+    "websiteState": "Error",
+    "websiteEvaluationDate": "01/02/2024",
+    "registerDate": "01/01/0101",
+    "numPagesWithNoErrors": 1,
+    "numPagesWithOneError": 2,
+    "numPagesWithOneAError": 3,
+    "numPagesWithOneAAError": 4,
+    "numPagesWithOneAAAError": 5,
+    "totalEvaluatedPages": 6,
+
+    "percPagesWithNoErrors": 2,
+    "percPagesWithOneError": 3,
+    "percPagesWithOneAError": 4,
+    "percPagesWithOneAAError": 5,
+    "percPagesWithOneAAAError": 6,
+    
+    "webpages": [
+        {
+            "outcome": "accepted",
+            "outcome_display": "Accepted",
+            "url": "http://wiki.alcidesfonseca.com/about",
+            "last_evaluation_date": "3/4/2024"
+        }
+    ],
+
+    "mostCommonErrors": [
+        {
+            "code": "QW-WCAG-T91",
+            "count": "1"
+        },
+        {
+            "code": "qwaaaa",
+            "count": "1"
+        },
+        {
+            "code": "qwaaaa",
+            "count": "1"
+        },
+        {
+            "code": "qwaaaa",
+            "count": "1"
+        },
+        {
+            "code": "qwaaaa",
+            "count": "1"
+        },
+        {
+            "code": "qwaaaa",
+            "count": "1"
+        }
+    ]
+}

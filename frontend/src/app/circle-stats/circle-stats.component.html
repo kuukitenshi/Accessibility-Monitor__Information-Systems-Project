@@ -1,0 +1,8 @@
+<div class="stats-circles" *ngIf="percentages && totals && totalEvaluatedPages">
+    <circle-progress *ngFor="let percentage of percentages; index as i"
+        [percent]="percentages[i]"
+        title="{{percentages[i]}}% ({{totals[i]}} / {{totalEvaluatedPages}})"
+        subtitle="{{subtitles[i]}}"
+        outerStrokeColor="{{strokeColors[i]}}"
+    ></circle-progress>
+</div>

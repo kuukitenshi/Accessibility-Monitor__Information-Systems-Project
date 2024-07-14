@@ -1,0 +1,120 @@
+doctype html
+html(lang='en')
+    head 
+        title='Acessibility-monitor | Report'
+        meta(charset='utf-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        link(rel="preconnect" href="https://fonts.googleapis.com")
+        link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin)
+        link(href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet")
+        style 
+            include static/style.css
+    body
+        div(class="pdf-size-container")
+            header 
+                h1='Accessibility-Monitor | Report'
+                p(class="report-date")=reportDate
+            div(class='header-website')
+                h2=websiteUrl
+            main
+
+                div(class="cards-container")
+                    div(class="card card-left")
+                        span(class="bold-span")='Register date: '
+                            span(class="normal-text")=registerDate
+                        span(class="bold-span")='State: '
+                            span(class="normal-text")=websiteState
+                    div(class="card card-right")
+                        span(class="bold-span")='Evaluation date: '
+                            span(class="normal-text")=websiteEvaluationDate
+
+                div(class="all-balls-container")
+                    div(class="balls-container")
+                        div(class="ball-text-container")
+                            div(class="stats-ball")
+                                h3
+                                    span(class='passed-num')=numPagesWithNoErrors
+                                    ='/' + totalEvaluatedPages
+                                p=percPagesWithNoErrors + '%'
+                            p='Webpages' 
+                                span(class='passed-num')=' without '
+                                ='errors'
+                        
+                        
+                        div(class="ball-text-container")
+                            div(class="stats-ball")
+                                h3
+                                    span(class='error-num')=numPagesWithOneError
+                                    ='/' + totalEvaluatedPages
+                                p=percPagesWithOneError + '%'
+                            p='Webpages with' 
+                                span(class='error-num')=' 1+ '
+                                ='errors'
+
+
+                    div(class="balls-container")
+                        div(class="ball-text-container")
+                            div(class="stats-ball")
+                                h3
+                                    span(class='error-num')=numPagesWithOneAError
+                                    ='/' + totalEvaluatedPages
+                                p=percPagesWithOneError + '%'
+                            p='Webpages with' 
+                                span(class='error-num')=' 1+ A '
+                                ='level error'
+
+                        div(class="ball-text-container")
+                            div(class="stats-ball")
+                                h3
+                                    spanspan(class='error-num')=numPagesWithOneAAError
+                                    ='/' + totalEvaluatedPages
+                                p=percPagesWithOneAAError + '%'
+                            p='Webpages with' 
+                                span(class='error-num')=' 1+ AA '
+                                ='level error'
+
+                        div(class="ball-text-container")
+                            div(class="stats-ball")
+                                h3
+                                    span(class='error-num')=numPagesWithOneAAAError
+                                    ='/' + totalEvaluatedPages
+                                p=percPagesWithOneAAAError + '%'
+                            p='Webpages with' 
+                                span(class='error-num')=' 1+ AAA '
+                                ='level error'
+
+                div(class='most-common-errors-container')
+                    div(class='header-errors')
+                        h2(class='errors-title')='Most common errors'
+                    div(class="errors-list")
+                        - var firstHalf = mostCommonErrors.slice(0, 5);
+                        - var secondHalf = mostCommonErrors.slice(5, 10);
+                        ul(class='first-half')
+                            each first in firstHalf
+                                li(class="error-item")
+                                    span(class="error-code")=first.code
+                                    span(class="error-occ")=first.count
+                        ul(class='second-half')
+                            each second in secondHalf
+                                li(class="error-item")
+                                    span(class="error-code")=second.code
+                                    span(class="error-occ")=second.count
+
+                div(class='header-webpages')
+                    h2='Monitored Webpages'
+                    
+                ul(class="webpages-list")
+                    li(class="webpages-explanation list")
+                        div(class="outcome-url-container")
+                            span(class="outcome-span")='State'
+                            span(class="webpage-url")='URL'
+                        div(class="date-color-container")
+                            span(class="webpage-date")='Last evaluation date'
+                    each webpage in webpages 
+                        li(class="list") 
+                            div(class="outcome-url-container")
+                                span(class="outcome-span outcome-color-" + webpage.outcome)=webpage.outcome_display
+                                span(class="webpage-url")=webpage.url
+                            div(class="date-color-container")
+                                span(class="webpage-date")=webpage.last_evaluation_date
+                                div(class="outcome-div div-outcome-color-" + webpage.outcome)

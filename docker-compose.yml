@@ -1,0 +1,37 @@
+services:
+
+  mongodb:
+    image: mongo
+    network_mode: host
+    expose:
+      - 27017
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_DATABASE=psi_projeto
+    volumes:
+      - ./mongo/init.js:/docker-entrypoint-initdb.d/init-mongo.js
+
+  backend:
+    container_name: psi-projeto-backend
+    network_mode: host
+    build:
+      context: ./backend
+    expose:
+      - 3069
+    ports:
+      - 3069:3069
+    depends_on:
+      - mongodb
+
+  frontend:
+    container_name: psi-projeto-frontend
+    network_mode: host
+    build: 
+      context: ./frontend
+    expose:
+      - 3019
+    ports:
+      - 3019:3019
+    depends_on:
+      - backend

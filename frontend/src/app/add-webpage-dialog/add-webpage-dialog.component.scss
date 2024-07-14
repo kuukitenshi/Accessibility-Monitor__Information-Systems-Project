@@ -1,0 +1,41 @@
+@use '@angular/material' as mat;
+@use '../../theme.scss' as appTheme;
+
+.title {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: top;
+    flex-direction: column;
+    padding-bottom: 1em;
+
+    h2 {
+        color: #b578c2;
+        font-weight: bold;
+        font-size: 1.2em;
+    }
+
+    p {
+        font-weight: bold;
+        overflow: hidden;
+        word-break: break-all;
+    }
+}
+
+mat-dialog-content {
+    padding: 1em;
+    height: 9em;
+    width: 25em;
+
+    mat-form-field {
+        width: 100%;
+    }
+}
+
+mat-dialog-actions {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 1em;
+}

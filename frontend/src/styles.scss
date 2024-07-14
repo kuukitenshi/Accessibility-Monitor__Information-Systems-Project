@@ -1,0 +1,47 @@
+/* You can add global styles to this file, and also import other style files */
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+
+    scrollbar-width: thin;
+    scrollbar-color: #b578c2 #424242 !important;
+}
+
+
+.mat-grid-tile-no-content-centering {
+
+    .mat-grid-tile-content {
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+}
+
+
+.mat-mdc-dialog-container {
+
+    // scrollbar-width: 5px;
+    // scrollbar-color: #b578c2;
+    // scrollbar-highlight-color: #A06CD5;
+
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #424242;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #b578c2;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #A06CD5;
+    }
+
+}

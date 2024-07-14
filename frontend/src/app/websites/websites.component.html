@@ -1,0 +1,82 @@
+<!-- <mat-progress-bar mode="indeterminate" *ngIf="!loaded"></mat-progress-bar> -->
+
+<div class="controls">
+    
+    <div class="button-actions">
+        
+        <div class="fixed-btns">
+            <button class="add-btn" mat-stroked-button (click)="openAddDialog()" color="accent">Add Website</button>
+            <div class="input-file">
+                <button mat-stroked-button color="accent" id="btn-file" (click)="fileUpload.click()">Choose File</button>
+                <input mat-raised-button #fileUpload type="file" (change)="onFileSelected($event)" />
+                <mat-icon aria-hidden="true" fontIcon="info" matTooltip="File should have only one link per line."></mat-icon>
+            </div>
+        </div>
+        <div class="container-remove">
+            <button id="trash-btn" mat-mini-fab aria-label="trash" color="warn" (click)="removeSelected('3ms', '3ms')" [hidden]="websitesSelected.length === 0">
+                <mat-icon id="icon-trash">delete</mat-icon>
+            </button>
+            <mat-checkbox #selectAllCheckbox color="warn" id="selectAll-box" (change)="selectAll($event)">{{selectAllCheckbox.checked ? 'Deselect' : 'Select'}} all</mat-checkbox>
+        </div>
+    </div>
+
+    <div class="list-display-controls">
+        <mat-form-field>
+            <mat-label>Status</mat-label>
+            <mat-select placeholder="Status" value="all" (selectionChange)="applyStatusFilter($event)">
+                <mat-option value="all" selected>All</mat-option>
+                <mat-option *ngFor="let state of possibleStateOptions" value="{{state}}">{{state | titlecase }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Sort by</mat-label>
+            <mat-select placeholder="Sort by" value="creation_date_asc" (selectionChange)="applySorting($event)">
+                <mat-select-trigger>
+                    <span class="sorting-option-display">
+                        <mat-icon aria-hidden="true" fontIcon="{{sortingOption.fontIcon}}"></mat-icon>
+                        {{sortingOption.name}}
+                    </span>
+                </mat-select-trigger>
+                <mat-option *ngFor="let option of sortingOptions" value="{{option.value}}">
+                    <span class="sorting-option-display">
+                        <mat-icon aria-hidden="true" fontIcon="{{option.fontIcon}}"></mat-icon>
+                        {{option.name}}
+                    </span>
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+</div>
+
+
+<div *ngIf="websites.length === 0" class="no-value">
+    <p>There's no websites!</p> 
+</div>
+
+<div class="container-gird">
+    <mat-grid-list [cols]="column" rowHeight="19em" class="grid">
+        <mat-grid-tile class="cell" *ngFor="let website of websites.filter(filterFunction).sort(sortingOption.sortFunction)">
+            
+            <button class="card-button-container" routerLink="/website/{{website._id}}">
+                <mat-card matRipple>
+                    <mat-card-header>
+                        <mat-card-title matTooltip="{{website.url}}">{{website.url}}</mat-card-title>
+                        
+                        <div class="options-card">
+                            <mat-checkbox #checkboxes color="warn" class="remove-box" (click)="$event.stopPropagation()" (change)="addToRemove($event, website)" [checked]="isChecked(website)"></mat-checkbox>
+                            <mat-icon aria-hidden="true" fontIcon="open_in_new" matTooltip="See more details"></mat-icon>
+                        </div>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <mat-divider></mat-divider>
+                        <p><span>Creation date: </span>{{website.creation_date | date: 'dd/MM/yyyy HH:mm'}}</p>
+                        <p><span>State: </span>{{website.state | titlecase}}</p>
+                        <p><span *ngIf="website.last_evaluation_date">Last evaluation date: <span id="text">{{website.last_evaluation_date | date: 'dd/MM/yyyy HH:mm'}}</span></span></p>
+                    </mat-card-content>
+                    <mat-card-actions align="end"></mat-card-actions>
+                </mat-card>
+            </button>
+            
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>

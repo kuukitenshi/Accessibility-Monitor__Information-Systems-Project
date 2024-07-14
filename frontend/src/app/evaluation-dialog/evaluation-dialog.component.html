@@ -1,0 +1,29 @@
+<div mat-dialog-title class="title">
+    <h2>Webpages to evaluate</h2>
+    <div class="bar-btn">
+        <form class="eval-form">
+            <mat-form-field>
+                <input class="search-bar" matInput [(ngModel)]="searchTerm" name="urlInput" placeholder="Search"
+                    type="search">
+            </mat-form-field>
+        </form>
+        <div class="btn-container">
+            <button mat-stroked-button class="select-button" color="accent" (click)="select()">{{selectedWebpages.length !== data.webpages.length ? 'Select All' : 'Deselect All'}}</button>
+        </div>
+    </div>
+</div>
+
+<div class="content-list">
+    <mat-dialog-content class="mat-dialog-content-scrollbar">
+        <mat-selection-list class="selection-list" (selectionChange)="selectionChange($event)">
+            <mat-list-option *ngFor="let webpage of filteredWebpages()" [selected]="selectedWebpages.includes(webpage)" [value]="webpage" >
+                {{webpage.url}}
+            </mat-list-option>
+        </mat-selection-list>
+    </mat-dialog-content>
+</div>
+
+<mat-dialog-actions>
+    <button mat-button (click)="onNoClick()" color="warn">Cancel</button>
+    <button mat-button [mat-dialog-close]="selectedWebpages" color="accent" [disabled]="selectedWebpages.length === 0">Start evaluation</button>
+</mat-dialog-actions>

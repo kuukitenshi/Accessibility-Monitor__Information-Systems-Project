@@ -1,0 +1,6 @@
+@use '@angular/material' as mat;
+@use '../../theme.scss' as appTheme;
+
+label {
+    color: mat.get-color-from-palette(appTheme.$my-primary, 100);
+}

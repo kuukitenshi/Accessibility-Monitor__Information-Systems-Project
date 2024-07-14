@@ -1,0 +1,21 @@
+<div mat-dialog-title class="title">
+  <h2>Add Webpage to Website</h2>
+  <p>{{data.website.url}}</p>
+</div>
+
+<mat-dialog-content>
+  <p>Insert Webpage's url</p>
+  <form>
+    <mat-form-field>
+      <mat-label>Webpage Url</mat-label>
+      <input matInput [(ngModel)]="inputUrl" name="urlInput" [formControl]="urlFormControl" placeholder="{{data.website.url}}/catalog">
+      <mat-error *ngIf="urlFormControl.hasError('required')">An url is required!</mat-error>
+      <mat-error *ngIf="urlFormControl.hasError('invalidUrl') && !urlFormControl.hasError('required')">{{urlFormControl.getError('invalidUrl').errorMessage}}</mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()" color="warn">Cancel</button>
+  <button mat-button [mat-dialog-close]="inputUrl" color="accent" disabled="{{urlFormControl.hasError('invalidUrl') || urlFormControl.hasError('required')}}">Add</button>
+</mat-dialog-actions>

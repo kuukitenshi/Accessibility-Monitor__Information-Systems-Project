@@ -1,0 +1,117 @@
+<div class="website-detail" *ngIf="website">
+
+    <div class="header-details">
+        <button mat-stroked-button (click)="goBack()">
+            <mat-icon aria-hidden="true" fontIcon="arrow_back_ios"></mat-icon>
+            Back
+        </button>
+        <h2>Website Details:</h2>
+    </div>
+
+    <div class="stats-container">
+        <mat-list>
+            <mat-list-item><span class="url-span">URL:</span> {{website.url}}</mat-list-item>
+            <mat-list-item><span>Creation date:</span> {{website.creation_date | date: 'dd/MM/yyyy
+                HH:mm'}}</mat-list-item>
+            <mat-list-item *ngIf="website.last_evaluation_date"><span>Last evaluation date:
+                </span>{{website.last_evaluation_date | date: 'dd/MM/yyyy HH:mm'}}</mat-list-item>
+            <div class="load-state" [style.width]="website.state === 'in evaluation' ? '15em' : '35em'">
+                <mat-list-item><span>State:</span> {{website.state | titlecase}}</mat-list-item>
+                <mat-spinner *ngIf="website.state === 'in evaluation'" [diameter]="20"></mat-spinner>
+            </div>
+        </mat-list>
+
+        <div class="evaluation-container">
+            <div class="stats-circles" *ngIf="webpages && webpages.length > 0">
+                <app-circle-stats [webpages]="webpages"></app-circle-stats>
+            </div>
+        </div>
+    </div>
+
+    <div class="stats-buttons-container">
+        <div class="fix-eval-btns">
+            <div class="eval-btn-container">
+                <button *ngIf="webpages && webpages.length > 0" class="eval-btn" mat-stroked-button
+                    (click)="openEvalDialog()" color="accent">Evaluate</button>
+            </div>
+            <div class="generate-report-container"
+                *ngIf="webpages && webpages.length > 0 && website.state === 'evaluated' || website.state === 'error in evaluation'">
+                <button mat-stroked-button [matMenuTriggerFor]="menu" class="download-btn" color="accent"
+                    [disabled]="downloadingFile">
+                    {{downloadingFile ? 'Downloading Report...' : 'Download Report'}}
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="downloadFile(ReportFileType.HTML)">HTML</button>
+                    <button mat-menu-item (click)="downloadFile(ReportFileType.PDF)">PDF</button>
+                </mat-menu>
+            </div>
+        </div>
+
+        <div class="error-btn-container"
+            *ngIf="(webpages && webpages.length > 0) && showErrorButton() ">
+            <button mat-stroked-button color="warn" (click)="openErrorsDialog()">Most common errors</button>
+        </div>
+    </div>
+
+
+    <h3>Monitored Webpages:</h3>
+    <div class="button-actions" *ngIf="webpages">
+        <div class="fixed-btns">
+            <button class="add-btn" mat-stroked-button (click)="openDialog()" color="accent">Add Webpage</button>
+            <div class="input-file">
+                <button mat-stroked-button color="accent" id="btn-file" (click)="fileUpload.click()">Choose
+                    File</button>
+                <input mat-raised-button #fileUpload type="file" (change)="onFileSelected($event)" />
+                <mat-icon aria-hidden="true" fontIcon="info"
+                    matTooltip="File should have only one link per line."></mat-icon>
+            </div>
+        </div>
+        <div class="container-remove">
+            <button id="trash-btn" mat-mini-fab aria-label="trash" color="warn" (click)="removeSelected('3ms', '3ms')"
+                [hidden]="webpagesSelected.length === 0">
+                <mat-icon id="icon-trash">delete</mat-icon>
+            </button>
+            <mat-checkbox #selectAllCheckbox color="warn" id="selectAll-box"
+                (change)="selectAll($event)">{{selectAllCheckbox.checked ? 'Deselect' : 'Select'}} all</mat-checkbox>
+        </div>
+    </div>
+
+    <mat-grid-list class="mat-grid-tile-no-content-centering" [cols]=column rowHeight="10rem" gutterSize="30px"
+        *ngIf="webpages && webpages.length > 0">
+        <mat-grid-tile *ngFor="let page of webpages">
+
+            <div class="card-button-container">
+                <mat-progress-bar mode="indeterminate" [style.visibility]="page.state !== 'in evaluation' ? 'hidden' : 'visible'"></mat-progress-bar>
+                <mat-card>
+                    <mat-card-header>
+                        <mat-card-title matTooltip="{{page.url}}">{{page.url}}</mat-card-title>
+                        <mat-checkbox #checkboxes color="warn" class="remove-box" (change)="addToRemove($event, page)" [checked]="isChecked(page)"></mat-checkbox>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <mat-divider></mat-divider>
+                        <div class="container-webpage-card">
+
+                            <div class="conten-labels">
+                                <p *ngIf="page.last_evaluation_date"><span>Last evaluation date: </span>
+                                    {{page.last_evaluation_date | date: 'dd/MM/yyyy HH:mm'}}</p>
+                                <p><span>State: </span>{{page.state | titlecase}}</p>
+                            </div>
+
+                            <div class="report-btn" *ngIf="page.state === 'accepted' || page.state === 'rejected'">
+                                <button mat-icon-button matTooltip="See webpage report" routerLink="/webpage/{{page._id}}">
+                                    <mat-icon>description</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                    <mat-card-actions align="end"></mat-card-actions>
+                </mat-card>
+            </div>
+
+        </mat-grid-tile>
+    </mat-grid-list>
+    <div class="container-no-value">
+        <p *ngIf="webpages && webpages.length === 0" class="no-value">There's no webpages in this website!</p>
+        <p *ngIf="webpages === undefined" class="no-value">Loading webpages...</p>
+    </div>
+</div>

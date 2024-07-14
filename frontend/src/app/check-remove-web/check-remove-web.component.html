@@ -1,0 +1,16 @@
+<div mat-dialog-title class="title">
+  <h2>Delete {{data.type}}</h2>
+</div>
+
+<div class="display">
+  <mat-dialog-content>
+    <p>Would you like to delete</p>
+    <p id="p-url"><span>{{data.url}}</span>?</p>
+  </mat-dialog-content>
+  
+  <mat-dialog-actions>
+    <button mat-button id="no" color="warn" mat-dialog-close (click)="onClick()">No</button>
+    <button mat-button color="accent" mat-dialog-close (click)="btnOk = true; onClick()" cdkFocusInitial>Yes</button>
+  </mat-dialog-actions>
+</div>
+

@@ -1,0 +1,80 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+html, body {
+  height: 100%;
+}
+
+$purple-p: (
+ 50: #cdb4db,
+ 100: #cdb4db,
+ 200: #cdb4db,
+ 300: #a06cd5,
+ 400: #7251b5,
+ 500: #cdb4db,
+ 600: #cdb4db,
+ 700: #cdb4db,
+ 800: #cdb4db,
+ 900: #cdb4db,
+ contrast: (
+   50: rgba(black, 0.87),
+   100: rgba(black, 0.87),
+   200: rgba(black, 0.87),
+   300: white,
+ )
+);
+
+$colors-p: (
+ 50: #4ea8de,
+ 100: #56cfe1,
+ 200: #cdb4db,
+ 300: #ffafcc,
+ 400: #82e5c8,
+ 500: #469d89,
+ 600: #358f80,
+ 700: #248277,
+ 800: #b8d0eb,
+ 900: #5390d9,
+ contrast: (
+   50: rgba(black, 0.87),
+   100: rgba(black, 0.87),
+   200: rgba(black, 0.87),
+   300: white,
+ )
+);
+
+$cancel-p: (
+  50: rgb(230, 82, 102),
+  100: #b04654,
+  200: #c71f37,
+  300: #bd1f36,
+  400: #b21e35,
+  500: #a71e34,
+  600: #a11d33,
+  700: #85182a,
+  800: #6e1423,
+  900: #641220,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: white,
+  )
+);
+
+$my-primary: mat.define-palette($purple-p, 300);
+$my-accent: mat.define-palette($colors-p, 400);
+$my-warn: mat.define-palette($cancel-p, 50);
+
+$my-theme: mat.define-dark-theme((
+ color: (
+   primary: $my-primary,
+   accent: $my-accent,
+   warn: $my-warn
+ ),
+ typography: mat.define-typography-config(),
+ density: 0
+));
+
+@include mat.all-component-themes($my-theme);

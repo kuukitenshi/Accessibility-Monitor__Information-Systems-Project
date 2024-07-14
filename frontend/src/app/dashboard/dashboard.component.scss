@@ -1,0 +1,116 @@
+@use '@angular/material' as mat;
+@use '../../theme.scss' as appTheme;
+
+.container {
+  display: flex;
+  justify-content: center;
+  padding: 1em;
+}
+
+mat-grid-list {
+  width: 95%;
+}
+
+mat-card-title {
+  font-weight: bold;
+  text-align: center;
+}
+
+mat-progress-bar {
+  position: absolute;
+  top: 0;
+}
+
+mat-divider {
+  margin-top: .7em;
+  margin-bottom: .6em;
+}
+
+mat-card {
+  width: 25em;
+  height: 7.1em;
+  gap: .4em;
+
+  p {
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}
+
+
+mat-card-content {
+  text-align: center;
+  width: 90%;
+  height: 90%;
+
+  p{
+    margin: 0;
+    padding: 0;
+  }
+}
+
+mat-card-footer {
+  height: 1em;
+}
+
+.card-button-container {
+  all: unset;
+  cursor: pointer;
+  transition: transform .3s ease;
+  box-sizing: border-box;
+}
+
+.card-button-container:focus-visible {
+  outline: white solid 2px;
+  transform: scale(2);
+}
+
+h2 {
+  font-size: xx-large;
+  display: flex;
+  justify-content: center;
+  margin-top: 2em;
+  color: mat.get-color-from-palette(appTheme.$my-primary, 300);
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+#p1 {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+#p2 {
+  text-align: center;
+  font-size: 1.2rem;
+  padding-top: 0.25em;
+  
+  span {
+    color: mat.get-color-from-palette(appTheme.$my-accent, 100);
+    font-weight: bold;
+  }
+}
+
+.no-value {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.3em;
+  padding-top: 5em;
+  color: gray;
+}
+
+
+.stats-circles {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 4em;
+}

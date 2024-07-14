@@ -1,0 +1,148 @@
+<div class="webpage-detail" *ngIf="webpage">
+
+    <!-- **************************************LEFT*********************************************************-->
+    <div class="left-side">
+
+        <div class="side-screen-left">
+
+
+            <div class="left-header">
+                <div class="title-test-list">
+                    <button mat-stroked-button (click)="goBack()">
+                        <mat-icon aria-hidden="true" fontIcon="arrow_back_ios"></mat-icon>
+                        Back
+                    </button>
+                    <h3>Performed Assertions</h3>
+                </div>
+
+                <div class="filter-btns">
+                    <mat-form-field>
+                        <mat-label>Type</mat-label>
+                        <mat-select placeholder="Type" value="all" (selectionChange)="applyTypeFilter($event)">
+                            <mat-option value="all" selected>All</mat-option>
+                            <mat-option *ngFor="let type of Object.values(AssertionType)" value="{{type}}">{{type | uppercase}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Outcome</mat-label>
+                        <mat-select placeholder="Outcome" value="all" (selectionChange)="applyOutcomeFilter($event)">
+                            <mat-option value="all" selected>All</mat-option>
+                            <mat-option *ngFor="let outcome of Object.values(TestResult)" value="{{outcome}}">{{outcome | titlecase}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Level</mat-label>
+                        <mat-select placeholder="Level" value="all" (selectionChange)="applyLevelFilter($event)">
+                            <mat-option value="all" selected>All</mat-option>
+                            <mat-option *ngFor="let level of Object.values(AssertionLevel)" value="{{level}}">{{level | uppercase}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <mat-divider></mat-divider>
+            </div>
+
+            <div class="test-list">
+                <p class="no-value" *ngIf="numTotalTests() === 0">Loading assertions...</p>
+                <p class="no-value" *ngIf="this.assertions.filter(assertionFilterFunc).length === 0 && numTotalTests() !== 0">There's no results found!</p>
+                
+                <mat-list *ngIf="this.assertions.filter(assertionFilterFunc).length > 0">
+                    <mat-list-item *ngFor="let test of this.assertions.filter(assertionFilterFunc)">
+                        
+                        <button class="card-button-container" (click)="setTestSelected(test)">
+                            <mat-card matRipple [class.button-color]="testSelected === test">
+                                <mat-card-header>
+                                    <mat-card-title matTooltip="{{test.code}}">{{test.code}}</mat-card-title>
+                                    <mat-icon [class.selected-arrow-icon]="testSelected === test">chevron_right</mat-icon>
+                                </mat-card-header>
+                            </mat-card>
+                        </button>
+                        
+                    </mat-list-item>
+                </mat-list>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- **************************************RIGHT*********************************************************-->
+    <div class="right-side">
+
+        <div class="header-info-webpage-right">
+            <div class="title">
+                <h1>{{webpage.url}}</h1>
+                <mat-divider></mat-divider>
+            </div>
+
+            <div class="stats">
+                <p *ngIf="webpage.last_evaluation_date"><span>Last evaluation date:
+                    </span>{{webpage.last_evaluation_date | date: 'dd/MM/yyyy HH:mm'}}</p>
+                <p><span>State: </span> {{webpage.state | titlecase}}</p>
+            </div>
+
+            <div class="test-stats-container">
+                <p><span>Passed assertions:</span> {{displayPercentageTest(TestResult.PASSED)}} ({{percentageSpecificTests(TestResult.PASSED)}}%)</p>
+                <p><span>Warned assertions:</span> {{displayPercentageTest(TestResult.WARNING)}} ({{percentageSpecificTests(TestResult.WARNING)}}%)</p>
+                <p><span>Failed assertions:</span> {{displayPercentageTest(TestResult.FAILED)}} ({{percentageSpecificTests(TestResult.FAILED)}}%)</p>
+                <p><span>Not applicable assertions:</span> {{displayPercentageTest(TestResult.INAPPLICABLE)}} ({{percentageSpecificTests(TestResult.INAPPLICABLE)}}%)</p>
+            </div>
+        </div>
+
+        <div class="show-test-info">
+
+            <div class="no-value" *ngIf="!testSelected">
+                <mat-icon id="sad-face" aria-hidden="true" fontIcon="sentiment_dissatisfied"></mat-icon>
+                <p>There's no assertions selected!</p>
+            </div>
+
+            <div class="show-content" *ngIf="testSelected">
+
+                <div class="header-test">
+                    <h2 class="title">{{testSelected.code}}</h2>
+                    <mat-divider></mat-divider>
+                    <div class="info">
+                        <p class="description">{{testSelected.description}}</p>
+                        <p><span>Outcome: </span>{{testSelected.outcome | titlecase}}</p>
+                        <p><span>Type: </span>{{testSelected.type | uppercase }}</p>
+                    </div>
+                    <div class="levels" *ngIf="testSelected?.levels!.length > 0">
+                        <p><span>Levels: </span>{{getLevels()}}</p>
+                    </div>
+                    <mat-divider></mat-divider>
+                </div>
+
+                <div class="result-title-container">
+                    <span class="result-title" *ngIf="testSelected?.results!.length > 0" >Results</span>
+                </div>
+
+                <div class="result-list" *ngIf="testSelected?.results!.length > 0">
+                    <mat-accordion multi>
+                        <mat-expansion-panel *ngFor="let result of testSelected?.results" (opened)="openedResults.add(result)" (closed)="openedResults.delete(result)">
+                             
+                            <mat-expansion-panel-header>
+                                <div class="color-banner" [style.background-color]="getColorVerdict(result.verdict)"></div>
+                                <mat-panel-title>
+                                    <p class="title-line">
+                                        <span class="verdict" [style.color]="getColorVerdict(result.verdict)">{{result.verdict | titlecase}}</span> 
+                                        <span class="code">{{result.code}}</span>
+                                    </p>
+                                </mat-panel-title>
+                                <mat-panel-description *ngIf="!openedResults.has(result)">{{result.description.length > 100 ? ((result.description | slice:0:100) + '...') : result.description}}</mat-panel-description>
+                            </mat-expansion-panel-header>
+                            
+                            <div class="content">
+                                <div class="element-content" *ngFor="let element of result.elements">
+                                    <mat-divider></mat-divider>
+                                    <p><span>Description:</span> {{result.description}}</p>
+                                    <p><span>HTML:</span> {{element.htmlCode}}</p>
+                                    <p><span>Pointer:</span> {{element.pointer}}</p>
+                                </div>
+                            </div>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

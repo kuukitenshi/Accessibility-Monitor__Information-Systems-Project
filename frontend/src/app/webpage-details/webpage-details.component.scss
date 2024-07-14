@@ -1,0 +1,397 @@
+@use '@angular/material' as mat;
+@use '../../theme.scss' as appTheme;
+
+span {
+    color: mat.get-color-from-palette(appTheme.$my-accent, 50);
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.webpage-detail {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+
+    .right-side {
+        width: 75%;
+        height: 100%;
+    }
+
+    .left-side {
+        width: 25%;
+        height: 100%;
+        box-sizing: border-box;
+        border-right: #494949 1px solid;
+    }
+}
+
+//************************* RIGHT
+.header-info-webpage-right {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    height: 20%;
+    border-bottom: #494949 1px solid;
+    box-sizing: border-box;
+    width: 100%;
+
+    .title {
+        color: mat.get-color-from-palette(appTheme.$my-primary, 300);
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        h1 {
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            font-weight: bold;
+            font-size: 2em;
+            margin-bottom: .3em;
+        }
+    }
+
+    .stats {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-direction: row;
+        width: 100%;
+
+        span {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+    }
+
+    .test-stats-container {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-direction: row;
+        width: 100%;
+    }
+}
+
+.show-test-info {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 80%;
+    overflow-y: auto;
+
+    .no-value {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        height: 250px;
+
+        p {
+            font-size: 1.3em;
+            color: gray;
+        }
+
+        #sad-face {
+            text-align: center;
+            font-size: 200px;
+            height: 200px;
+            width: 200px;
+            color: gray;
+        }
+    }
+
+    .show-content {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .header-test {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            gap: .1em;
+            
+            padding-top: .5em;
+            width: 100%;
+
+            .title {
+                margin: 0;
+                padding: 0 0 .2em 0;
+                font-weight: bold;
+                font-size: 1.5em;
+                color: mat.get-color-from-palette(appTheme.$my-primary, 300);
+            }
+
+            .info {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                gap: .2em;
+                flex-direction: column;
+                padding-top: .2em;
+                border-color: #d00c0c;
+
+                .description{
+                    padding-top: .2em;
+                    text-align: center;
+                    width: 95%;
+                }
+
+                span {
+                    padding-bottom: .2em;
+                }
+            }
+
+            .levels{
+                padding-bottom: .2em;
+            }
+        }
+
+        .result-title-container {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .result-title {
+            width: 90%;
+            font-size: 1.2em;
+            margin-bottom: 1em;
+        }
+
+        .result-list {
+            width: 90%;
+            padding: 0 1em 0 1em;
+            height: 80%;
+            min-height: 60%;
+            max-height: 80%;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            mat-accordion {
+                width: 100%;
+            }
+
+            mat-expansion-panel {
+                margin-bottom: 1em;
+
+                mat-expansion-panel-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    width: 100%;
+                    flex-direction: row;
+                }
+
+                mat-panel-title{
+                    .title-line{
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        width: 8.5em;
+                        flex-direction: row;
+
+                        .code {
+                            color: white;
+                            font-weight: normal;
+                        }
+                    }
+
+                }
+
+                .content {
+                    padding: 0 2em 0 0;
+                }
+
+                .element-content {
+                    display: flex;
+                    flex-direction: column;
+                    gap: .5em;
+                    width: 100%;
+                    padding-top: .3em;
+                }
+            }
+        }
+    }
+}
+
+
+.color-banner {
+    width: 3em;
+    height: 50000em;
+}
+
+
+.selected-arrow-icon {
+    transform: translateX(50px)
+}
+
+//*************************LEFT
+
+
+.card-button-container {
+    all: unset;
+    cursor: pointer;
+    transition: transform .3s ease;
+    width: 100%;
+    height: 3em;
+
+    mat-icon {
+        transition: transform .3s ease;
+    }
+}
+
+.card-button-container:focus-visible {
+    outline: white solid 2px;
+    transform: scale(1.02);
+}
+
+.card-button-container:hover {
+    transform: scale(1.02);
+}
+
+.side-screen-left {
+    width: 100%;
+    height: 100%;
+    padding-left: .5em;
+
+    .left-header {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 1.5em;
+        height: 17%;
+
+        .title-test-list {
+            display: flex;
+            gap: 2em;
+            align-items: center;
+            width: 100%;
+            margin-top: .5em;
+
+            h3 {
+                margin: 0;
+                font-weight: bold;
+                font-size: 1.5em;
+                color: mat.get-color-from-palette(appTheme.$my-primary, 300);
+            }
+        }
+
+        .filter-btns {
+            width: 85%;
+            height: 35%;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+
+            mat-form-field {
+                display: flex;
+                align-items: center;
+                justify-content: space-evenly;
+                width: 30%;
+            }
+        }
+    }
+
+    .no-value {
+        font-size: 1.3em;
+        color: gray;
+    }
+
+
+    .test-list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 83%;
+
+        mat-list {
+            overflow-y: scroll;
+            width: 95%;
+            height: 100%;
+
+            mat-list-item {
+                margin-bottom: .8em; //separacao entre cartoes da lista
+            }
+
+            mat-card {
+                width: 100%;
+                height: 100%;
+
+                mat-card-title {
+                    font-size: 1em;
+                    padding: 0 0 0 1em;
+                }
+
+                mat-card-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin: 0;
+                    padding: .6em .5em 0 .5em;
+                    width: 95%;
+                }
+            }
+        }
+
+    }
+}
+
+mat-divider {
+    width: 85%;
+    padding-top: .2em;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+.button-color {
+    background-color: mat.get-color-from-palette(appTheme.$my-primary, 300);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+//*****************************************************
+
+.container-header-filter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .tests-header {
+        margin-right: 20px;
+    }
+
+    .list-display-controls {
+        display: flex;
+        gap: 20px;
+    }
+
+}

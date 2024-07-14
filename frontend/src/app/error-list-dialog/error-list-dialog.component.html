@@ -1,0 +1,19 @@
+<main>
+    <h1>Top 10 most common errors!</h1>
+    
+    <div *ngIf="errors.length === 0" class="no-value">
+        <p>There's no errors found yet!</p>
+    </div>
+    <ul *ngIf="errors.length !== 0">
+        <li *ngFor="let error of errors">
+            <mat-card>
+                <h2>{{error.code}}</h2>
+                <p>{{error.description}}</p>
+                <p class="reverse-p"><span>{{error.count}}</span> ocurrences</p>
+            </mat-card>
+        </li>
+    </ul>
+    <div class="btn-container">
+        <button color="warn" mat-button (click)="close()">Close</button>
+    </div>
+</main>

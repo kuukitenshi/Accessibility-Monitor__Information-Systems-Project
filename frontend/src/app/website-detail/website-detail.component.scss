@@ -1,0 +1,284 @@
+@use '@angular/material' as mat;
+@use '../../theme.scss' as appTheme;
+
+body {
+    overflow: hidden !important;
+    margin: 0;
+    padding: 0;
+}
+
+mat-list {
+    width: 540px;
+    box-sizing: border-box;
+}
+
+.url-span {
+    max-width: 100px;
+    overflow: hidden;
+}
+
+.stats-container, .stats-circles {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+h2 {
+    font-size: 2.85em;
+    display: flex;
+    justify-content: left;
+    margin-top: 50px;
+    color: mat.get-color-from-palette(appTheme.$my-primary, 300);
+}
+
+p {
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+mat-list-grid {
+    width: 100%;
+}
+
+mat-grid-list {
+    width: 100%;
+    padding-top: 2em;
+}
+
+mat-divider {
+    margin-top: .5em;
+    margin-bottom: .5em;
+}
+
+mat-card {
+    width: 30em;
+    gap: .4em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 11.5em;
+}
+
+mat-card-title {
+    font-weight: bold;
+    max-width: 20em;
+    width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+mat-card-header {
+    width: 28em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+mat-card-content {
+    height: 2.9em;
+}
+
+h3 {
+    display: flex;
+    justify-content: left;
+    margin-top: 50px;
+    font-weight: bold;
+    color: mat.get-color-from-palette(appTheme.$my-primary, 300);
+    font-size: 2em;
+}
+
+span {
+    color: mat.get-color-from-palette(appTheme.$my-accent, 50);
+    font-weight: bold;
+}
+
+.website-detail {
+    margin: 0 3em;
+}
+
+.no-value {
+    font-size: 1.3em;
+    color: gray;
+}
+
+.add-btn {
+    margin-bottom: 1.7em;
+}
+
+.header-details {
+    margin: 0 0 .1em 0;
+    padding-top: 3em;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+
+    h2 {
+        margin: 0;
+        padding: 0 0 0 .5em;
+    }
+}
+
+.evaluation-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 70%;
+
+    .loading-balls{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        p {
+            text-align: center;
+        }
+    }
+}
+
+.stats-buttons-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    .fix-eval-btns{
+        display:flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 20%;
+        max-width: 20%;
+        min-width: 20%;
+
+        .download-btn {
+            width: 100%;
+            min-width: 100%;
+        }
+
+        .eval-btn-container {
+            box-sizing: border-box;
+        }
+    }
+    
+    .error-btn-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 82.3%;
+        padding-left: 16em;
+    }
+}
+
+.eval-btn {
+    width: 138px;
+}
+
+.button-actions {
+    width: 40em;
+    height: 5em;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    align-items: flex-start;
+    margin: 0;
+
+    .fixed-btns {
+        width: 23em;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        align-items: flex-start;
+        margin: 0;
+    }
+
+    .container-remove{
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 15em;
+    }
+
+    mat-checkbox {
+        width: 9em;
+    }
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.input-file {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+
+    #btn-file {
+        width: 9.5em;
+    }
+
+
+    .label-file {
+        cursor: pointer;
+    }
+
+
+    p {
+        margin: 0;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        width: 10rem;
+    }
+
+    mat-icon {
+        padding: .2em .2em 0 .3em;
+    }
+}
+
+#selectAll-box {
+    visibility: hidden;
+}
+
+.showBox {
+    visibility: visible !important;
+}
+
+#icon-trash {
+    color: white;
+}
+
+.load-state{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 15em;
+}
+
+
+.container-webpage-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 28.2em;
+    height: 5.5em;
+    
+    .content-label {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        width: 28.3em;
+        height: 5.5em;
+        flex-direction: row;
+    }
+
+    .report-btn{
+        align-self: flex-end;
+    }
+}
+
+.container-no-value{
+    p {
+        text-align: center;
+    }
+}
