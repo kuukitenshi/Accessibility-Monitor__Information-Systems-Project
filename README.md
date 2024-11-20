@@ -1,8 +1,8 @@
 # Accessibility Monitor - Information Systems Project
 
-This project was a collaborative effort involving two more students for our ```Information Systems Project``` subject.
+This project was a collaborative effort involving two more students for our ``` Information Systems Project``` subject.
 
-This project consists of an accessibility monitor that allows you to evaluate the webpages of a website based on the accessibility criteria tested by the library [QualWeb](https://qualweb.di.fc.ul.pt/evaluator/).
+This project consists of an accessibility monitor, a ```full-stack``` app, that allows you to evaluate the webpages of a website based on the accessibility criteria tested by the library [QualWeb](https://qualweb.di.fc.ul.pt/evaluator/).
 
 
 ---
