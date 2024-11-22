@@ -4,7 +4,7 @@ This project was a collaborative effort involving two more students for our ``` 
 
 This project consists of an accessibility monitor, a ```full-stack``` app, that allows you to evaluate the webpages of a website based on the accessibility criteria tested by the library [QualWeb](https://qualweb.di.fc.ul.pt/evaluator/).
 
-Implemented with Angular, Express, and MongoDB.
+Implemented with ```Angular```, ```Express```, and ```MongoDB```.
 
 ---
 ## Run
